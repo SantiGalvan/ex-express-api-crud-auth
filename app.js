@@ -7,8 +7,12 @@ const host = process.env.HOST || 'localhost';
 const postsRouter = require("./routers/posts.js");
 const categoriesRouter = require("./routers/categories.js");
 const tagsRouter = require("./routers/tags.js");
+const authRouter = require("./routers/auth.js");
 
 app.use(express.json());
+
+// User
+app.use('/auth', authRouter);
 
 // Post
 app.use('/posts', postsRouter);
