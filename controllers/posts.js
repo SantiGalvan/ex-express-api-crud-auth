@@ -1,9 +1,19 @@
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const slugify = require("slugify");
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const store = async (req, res) => {
     const { title, content, categoryId, tags } = req.body;
+
+    // Inserimento dell'utente in automatico
+    const token = req.headers.authorization.split(' ')[1];
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const userEmail = decoded.email;
+    const user = await prisma.user.findUnique({ where: { email: userEmail } });
+    const userId = user.id;
 
     const slug = slugify(title);
 
@@ -14,6 +24,7 @@ const store = async (req, res) => {
         content,
         published: req.body.published ? true : false,
         categoryId: categoryId ? categoryId : '',
+        userId,
         tags: {
             connect: tags.map(id => ({ id }))
         }
