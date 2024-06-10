@@ -8,7 +8,7 @@ dotenv.config();
 const store = async (req, res) => {
     const { title, content, categoryId, tags } = req.body;
 
-    // Inserimento dell'utente in automatico
+    // Inserimento dell'utente in automatico recuperando l'id dal token
     const token = req.headers.authorization.split(' ')[1];
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     const userEmail = decoded.email;
