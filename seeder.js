@@ -9,7 +9,8 @@ const posts = [
         content: "In questo articolo esploreremo le basi di JavaScript, un linguaggio di programmazione essenziale per lo sviluppo web.",
         published: true,
         categoryId: 2,
-        tags: [1, 4, 5]
+        tags: [1, 4, 5],
+        userId: 1
     },
     {
         id: 2,
@@ -18,7 +19,8 @@ const posts = [
         content: "Flexbox è un layout model in CSS3 progettato per aiutare a distribuire spazio lungo un container e allineare gli elementi.",
         published: false,
         categoryId: 1,
-        tags: [2, 3]
+        tags: [2, 3],
+        userId: 2
     },
     {
         id: 3,
@@ -27,7 +29,8 @@ const posts = [
         content: "Le Promesse in JavaScript rappresentano il completamento (o fallimento) eventuale di un'operazione asincrona e i suoi valori risultanti.",
         published: true,
         categoryId: 2,
-        tags: [1, 5]
+        tags: [1, 5],
+        userId: 3
     },
     {
         id: 4,
@@ -36,7 +39,8 @@ const posts = [
         content: "TypeScript è un superset tipizzato di JavaScript che si compila in JavaScript semplice.",
         published: true,
         categoryId: 2,
-        tags: [1, 5, 6]
+        tags: [1, 5, 6],
+        userId: 4
     },
     {
         id: 5,
@@ -45,7 +49,8 @@ const posts = [
         content: "Impara come creare un'API RESTful utilizzando Node.js ed Express.",
         published: false,
         categoryId: 2,
-        tags: [5, 7]
+        tags: [5, 7],
+        userId: 5
     },
     {
         id: 6,
@@ -54,7 +59,8 @@ const posts = [
         content: "Async/Await semplifica la scrittura di codice asincrono in JavaScript, rendendolo simile al codice sincrono.",
         published: true,
         categoryId: 2,
-        tags: [1, 5]
+        tags: [1, 5],
+        userId: 1
     },
     {
         id: 7,
@@ -63,7 +69,8 @@ const posts = [
         content: "Vue.js è un framework progressivo per costruire interfacce utente.",
         published: false,
         categoryId: 1,
-        tags: [1, 8, 9]
+        tags: [1, 8, 9],
+        userId: 2
     },
     {
         id: 8,
@@ -72,7 +79,8 @@ const posts = [
         content: "Redux è un contenitore di stato prevedibile per applicazioni JavaScript.",
         published: true,
         categoryId: 2,
-        tags: [4, 6]
+        tags: [4, 6],
+        userId: 3
     },
     {
         id: 9,
@@ -81,7 +89,8 @@ const posts = [
         content: "GraphQL è un linguaggio di query per API e un runtime per l'esecuzione di tali query.",
         published: true,
         categoryId: 2,
-        tags: [1, 4, 5]
+        tags: [1, 4, 5],
+        userId: 4
     },
     {
         id: 10,
@@ -90,7 +99,8 @@ const posts = [
         content: "Esploriamo alcune delle caratteristiche moderne disponibili in JavaScript (ES6 e oltre).",
         published: false,
         categoryId: 2,
-        tags: [1, 4]
+        tags: [1, 4],
+        userId: 5
     },
     {
         id: 11,
@@ -99,7 +109,8 @@ const posts = [
         content: "React Native permette di creare app veramente native e non compromette l'esperienza degli utenti.",
         published: true,
         categoryId: 2,
-        tags: [4, 5]
+        tags: [4, 5],
+        userId: 1
     },
     {
         id: 12,
@@ -108,7 +119,8 @@ const posts = [
         content: "Next.js è un framework React che abilita il rendering server-side e la generazione statica del sito.",
         published: false,
         categoryId: 2,
-        tags: [4, 5, 6]
+        tags: [4, 5, 6],
+        userId: 2
     },
     {
         id: 13,
@@ -117,7 +129,8 @@ const posts = [
         content: "Il DOM è un'interfaccia di programmazione per documenti web.",
         published: true,
         categoryId: 2,
-        tags: [3, 4, 5]
+        tags: [3, 4, 5],
+        userId: 3
     },
     {
         id: 14,
@@ -126,7 +139,8 @@ const posts = [
         content: "L'accessibilità web significa che i siti web, gli strumenti e le tecnologie sono progettati e sviluppati in modo che le persone con disabilità possano usarli.",
         published: true,
         categoryId: 7,
-        tags: [4, 5]
+        tags: [4, 5],
+        userId: 4
     },
     {
         id: 15,
@@ -135,7 +149,8 @@ const posts = [
         content: "Impara come testare le applicazioni JavaScript utilizzando vari framework di test.",
         published: false,
         categoryId: 2,
-        tags: [1, 5, 6]
+        tags: [1, 5, 6],
+        userId: 5
     },
     {
         id: 16,
@@ -144,7 +159,8 @@ const posts = [
         content: "Migliora le prestazioni delle tue applicazioni web con questi suggerimenti di ottimizzazione.",
         published: true,
         categoryId: 2,
-        tags: [4, 5]
+        tags: [4, 5],
+        userId: 1
     },
     {
         id: 17,
@@ -153,7 +169,8 @@ const posts = [
         content: "Docker è un set di prodotti piattaforma come servizio che utilizzano la virtualizzazione a livello di sistema operativo per consegnare software in pacchetti chiamati container.",
         published: true,
         categoryId: 2,
-        tags: [4, 5, 6]
+        tags: [4, 5, 6],
+        userId: 2
     },
     {
         id: 18,
@@ -162,7 +179,8 @@ const posts = [
         content: "Esploriamo le differenze tra GraphQL e REST e vediamo quale si adatta meglio alle tue esigenze.",
         published: true,
         categoryId: 2,
-        tags: [1, 4, 5]
+        tags: [1, 4, 5],
+        userId: 3
     },
     {
         id: 19,
@@ -171,7 +189,8 @@ const posts = [
         content: "Svelte è un nuovo framework JavaScript che compila i componenti in codice efficiente che aggiorna il DOM.",
         published: false,
         categoryId: 2,
-        tags: [1, 5, 6]
+        tags: [1, 5, 6],
+        userId: 4
     },
     {
         id: 20,
@@ -180,7 +199,8 @@ const posts = [
         content: "Webpack è un modulo bundler per JavaScript che permette di gestire dipendenze e asset in modo efficiente.",
         published: true,
         categoryId: 2,
-        tags: [1, 5, 6]
+        tags: [1, 5, 6],
+        userId: 5
     }
 ];
 
@@ -210,6 +230,39 @@ const tags = [
     { id: 10, label: "SQL" }
 ];
 
+const users = [
+    {
+        id: 1,
+        name: "Mario Rossi",
+        email: "mario.rossi@example.com",
+        password: "MarioRossi123!"
+    },
+    {
+        id: 2,
+        name: "Luca Bianchi",
+        email: "luca.bianchi@example.com",
+        password: "LucaBianchi456!"
+    },
+    {
+        id: 3,
+        name: "Giulia Verdi",
+        email: "giulia.verdi@example.com",
+        password: "GiuliaVerdi789!"
+    },
+    {
+        id: 4,
+        name: "Anna Neri",
+        email: "anna.neri@example.com",
+        password: "AnnaNeri321!"
+    },
+    {
+        id: 5,
+        name: "Paolo Gialli",
+        email: "paolo.gialli@example.com",
+        password: "PaoloGialli654!"
+    }
+];
+
 // Categorie
 prisma.category.createMany({
     data: categories
@@ -224,10 +277,17 @@ prisma.tag.createMany({
     .then()
     .catch(err => console.error(err));
 
+// User
+prisma.user.createMany({
+    data: users
+})
+    .then()
+    .catch(err => console.error(err));
+
 // Posts
 posts.forEach(post => {
 
-    const { id, title, slug, content, categoryId, published, tags } = post;
+    const { id, title, slug, content, categoryId, published, tags, userId } = post;
 
     const data = {
         id,
@@ -236,6 +296,7 @@ posts.forEach(post => {
         content,
         categoryId,
         published,
+        userId,
         tags: { connect: tags.map(id => ({ id })) }
     }
 
