@@ -9,11 +9,11 @@ const registerBody = {
             bail: true
         },
         isEmail: {
-            errorMessage: 'LEmail non valida',
+            errorMessage: 'Email non valida',
             bail: true
         },
         custom: {
-            option: async (value) => {
+            options: async (value) => {
                 const user = await prisma.user.findUnique({
                     where: { email: value }
                 });
