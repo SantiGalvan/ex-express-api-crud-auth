@@ -52,4 +52,27 @@ const registerBody = {
     }
 }
 
-module.exports = { registerBody }
+const loginBody = {
+    email: {
+        in: ["body"],
+        notEmpty: {
+            errorMessage: 'L\'email è obbligatoria',
+            bail: true
+        },
+        isEmail: {
+            errorMessage: 'Email non valida',
+        }
+    },
+    password: {
+        in: ["body"],
+        notEmpty: {
+            errorMessage: 'La password è obbligatoria',
+            bail: true
+        },
+        isString: {
+            errorMessage: 'La password non può contenere solo da numeri',
+        }
+    }
+}
+
+module.exports = { registerBody, loginBody }
