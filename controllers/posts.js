@@ -50,7 +50,7 @@ const store = async (req, res) => {
 const index = async (req, res) => {
     try {
         const where = {};
-        const { published, text, page = 1, limit = 5 } = req.query;
+        const { published, text, page = 1, limit = 8 } = req.query;
 
         // Paginazione
         const offset = (page - 1) * limit;
@@ -80,17 +80,21 @@ const index = async (req, res) => {
             include: {
                 category: {
                     select: {
-                        id: true
+                        label: true,
+                        id: true,
+                        color: true
                     }
                 },
                 tags: {
                     select: {
-                        id: true
+                        label: true,
+                        id: true,
+                        color: true
                     }
                 },
                 user: {
                     select: {
-                        id: true
+                        name: true
                     }
                 }
             }
@@ -116,12 +120,16 @@ const show = async (req, res) => {
             include: {
                 category: {
                     select: {
-                        label: true
+                        label: true,
+                        id: true,
+                        color: true
                     }
                 },
                 tags: {
                     select: {
-                        label: true
+                        label: true,
+                        id: true,
+                        color: true
                     }
                 },
                 user: {
