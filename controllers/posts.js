@@ -50,7 +50,7 @@ const store = async (req, res) => {
 const index = async (req, res) => {
     try {
         const where = {};
-        const { published, text, page = 1, limit = 8 } = req.query;
+        const { published, text, page = 1, limit = 12 } = req.query;
 
         // Paginazione
         const offset = (page - 1) * limit;
