@@ -32,6 +32,7 @@ model Post {
 model Category {
   id        Int      @id @default(autoincrement())
   label     String
+  color     String?
   posts     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -40,6 +41,7 @@ model Category {
 model Tag {
   id        Int      @id @default(autoincrement())
   label     String
+  color     String?
   posts     Post[]
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
