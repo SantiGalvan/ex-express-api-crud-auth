@@ -23,7 +23,7 @@ const store = async (req, res) => {
         image: req.body.image ? req.body.image : '',
         content,
         published: req.body.published ? true : false,
-        categoryId: categoryId ? categoryId : '',
+        categoryId: categoryId ? Number(categoryId) : '',
         // userId,
         tags: {
             connect: tags.map(id => ({ id }))
@@ -75,6 +75,11 @@ const index = async (req, res) => {
 
         const posts = await prisma.post.findMany({
             where,
+            orderBy: [
+                {
+                    createdAt: 'desc'
+                }
+            ],
             take: parseInt(limit),
             skip: parseInt(offset),
             include: {
