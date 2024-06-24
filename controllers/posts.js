@@ -2,6 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const slugify = require("slugify");
 const jwt = require("jsonwebtoken");
+const { PORT, HOST } = process.env;
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -20,13 +21,13 @@ const store = async (req, res) => {
     const data = {
         title,
         slug,
-        image: req.body.image ? req.body.image : '',
+        image: req.file ? `${HOST}:${PORT}/post_images/${req.file.filename}` : '',
         content,
         published: req.body.published ? true : false,
         categoryId: categoryId ? Number(categoryId) : '',
         // userId,
         tags: {
-            connect: tags.map(id => ({ id }))
+            connect: tags.map(id => ({ id: parseInt(id) }))
         }
     }
 
@@ -42,6 +43,9 @@ const store = async (req, res) => {
         });
         res.status(200).send(post);
     } catch (err) {
+        if (req.file) {
+            deletePic('posts_images', req.file.filename);
+        }
         console.error(err);
         res.status(500).send('Server Error');
     }

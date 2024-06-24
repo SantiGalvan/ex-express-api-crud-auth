@@ -6,9 +6,21 @@ const { validationSlug } = require("../validations/generalValidation.js");
 const bodyData = require("../validations/posts.js");
 const validationToken = require("../middlewares/auth.js");
 const verifyOwnership = require("../middlewares/authUser.js");
+const multer = require("multer");
+const path = require("path");
 
-// Store con validatori (token e dati ricevuti)
-router.post('/', validator(bodyData), postsController.store);
+const storage = multer.diskStorage({
+    destination: "public/post_images",
+    filename: (req, file, cf) => {
+        const fileType = path.extname(file.originalname);
+        cf(null, String(Date.now()) + fileType);
+    }
+})
+
+const upload = multer({ storage });
+
+// Store con validatori (token e dati ricevuti) e upload dell'immagine
+router.post('/', [upload.single("image"), validator(bodyData)], postsController.store);
 // Index
 router.get('/', postsController.index);
 // Validatore dello slug
