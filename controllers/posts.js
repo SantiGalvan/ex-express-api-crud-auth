@@ -43,9 +43,6 @@ const store = async (req, res) => {
         });
         res.status(200).send(post);
     } catch (err) {
-        if (req.file) {
-            deletePic('posts_images', req.file.filename);
-        }
         console.error(err);
         res.status(500).send('Server Error');
     }
@@ -168,12 +165,12 @@ const update = async (req, res) => {
         const data = {
             title,
             slug: newSlug,
-            image: req.body.image ? req.body.image : '',
+            image: req.file ? `${HOST}:${PORT}/post_images/${req.file.filename}` : '',
             content,
             published: req.body.published ? true : false,
-            categoryId: categoryId ? categoryId : '',
+            categoryId: categoryId ? Number(categoryId) : '',
             tags: {
-                connect: tags.map(id => ({ id }))
+                connect: tags.map(id => ({ id: parseInt(id) }))
             }
         }
 

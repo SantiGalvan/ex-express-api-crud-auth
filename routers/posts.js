@@ -28,7 +28,7 @@ router.use('/:slug', validator(validationSlug));
 // Show
 router.get('/:slug', postsController.show);
 // Update con validatori (token e dati ricevuti)
-router.put('/:slug', validator(bodyData), postsController.update);
+router.put('/:slug', [upload.single("image"), validator(bodyData)], postsController.update);
 // Delete con validatore del token
 router.delete('/:slug', postsController.destroy);
 
