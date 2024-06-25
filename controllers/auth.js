@@ -63,4 +63,22 @@ const login = async (req, res) => {
     }
 }
 
-module.exports = { register, login }
+const index = async (req, res) => {
+    try {
+
+        const users = await prisma.user.findMany();
+
+        users.find(user => {
+            delete user.id;
+            delete user.password;
+        });
+
+        res.json(users);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('Server Error');
+    }
+}
+
+module.exports = { register, login, index }
