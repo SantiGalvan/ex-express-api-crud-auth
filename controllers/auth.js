@@ -19,7 +19,9 @@ const register = async (req, res) => {
 
         const token = generateToken({
             email: user.email,
-            name: user.name
+            name: user.name,
+            isAdmin: false,
+            isOwner: false
         });
 
         delete user.id;
@@ -47,7 +49,9 @@ const login = async (req, res) => {
 
         const token = generateToken({
             email: user.email,
-            name: user.name
+            name: user.name,
+            isAdmin: user.isAdmin,
+            isOwner: user.isOwner
         });
 
         delete user.id;
