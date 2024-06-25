@@ -20,7 +20,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Store con validatori (token e dati ricevuti) e upload dell'immagine
-router.post('/', [upload.single("image"), validator(bodyData)], postsController.store);
+router.post('/', [validationToken, upload.single("image"), validator(bodyData)], postsController.store);
 // Index
 router.get('/', postsController.index);
 // Validatore dello slug
@@ -28,8 +28,8 @@ router.use('/:slug', validator(validationSlug));
 // Show
 router.get('/:slug', postsController.show);
 // Update con validatori (token e dati ricevuti)
-router.put('/:slug', [upload.single("image"), validator(bodyData)], postsController.update);
+router.put('/:slug', [validationToken, verifyOwnership, upload.single("image"), validator(bodyData)], postsController.update);
 // Delete con validatore del token
-router.delete('/:slug', postsController.destroy);
+router.delete('/:slug', [validationToken, verifyOwnership], postsController.destroy);
 
 module.exports = router;
