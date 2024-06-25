@@ -25,7 +25,7 @@ const store = async (req, res) => {
         content,
         published: req.body.published ? true : false,
         categoryId: categoryId ? Number(categoryId) : '',
-        // userId,
+        userId,
         tags: {
             connect: tags.map(id => ({ id: parseInt(id) }))
         }
