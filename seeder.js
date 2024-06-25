@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { hashPassword } = require("./utils/password");
 const prisma = new PrismaClient();
 
 const tags = [
@@ -30,33 +31,51 @@ const categories = [
 const users = [
     {
         id: 1,
+        isAdmin: true,
+        isOwner: false,
         name: "Mario Rossi",
         email: "mario.rossi@example.com",
         password: "MarioRossi123!"
     },
     {
         id: 2,
+        isAdmin: false,
+        isOwner: false,
         name: "Luca Bianchi",
         email: "luca.bianchi@example.com",
         password: "LucaBianchi456!"
     },
     {
         id: 3,
+        isAdmin: false,
+        isOwner: false,
         name: "Giulia Verdi",
         email: "giulia.verdi@example.com",
         password: "GiuliaVerdi789!"
     },
     {
         id: 4,
+        isAdmin: true,
+        isOwner: false,
         name: "Anna Neri",
         email: "anna.neri@example.com",
         password: "AnnaNeri321!"
     },
     {
         id: 5,
+        isAdmin: false,
+        isOwner: false,
         name: "Paolo Gialli",
         email: "paolo.gialli@example.com",
         password: "PaoloGialli654!"
+    },
+    {
+        id: 7,
+        isAdmin: true,
+        isOwner: true,
+        name: "Santiago Galvan",
+        email: "santiago.galvan@example.com",
+        password: "password"
     }
 ];
 
@@ -479,11 +498,22 @@ prisma.tag.createMany({
     .catch(err => console.error(err));
 
 // User
-prisma.user.createMany({
-    data: users
+users.forEach(async (user) => {
+    const { id, email, name, password, isAdmin, isOwner } = user;
+
+    const passwordDb = await hashPassword(password);
+
+    const data = {
+        id,
+        email,
+        name,
+        password: passwordDb,
+        isAdmin,
+        isOwner
+    };
+
+    prisma.user.create({ data }).then().catch(err => console.error(err));
 })
-    .then()
-    .catch(err => console.error(err));
 
 // Posts
 posts.forEach(post => {

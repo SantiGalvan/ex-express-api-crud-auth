@@ -2,6 +2,7 @@ const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 const slugify = require("slugify");
 const jwt = require("jsonwebtoken");
+const { PORT, HOST } = process.env;
 const dotenv = require("dotenv");
 dotenv.config();
 
@@ -20,13 +21,13 @@ const store = async (req, res) => {
     const data = {
         title,
         slug,
-        image: req.body.image ? req.body.image : '',
+        image: req.file ? `${HOST}:${PORT}/post_images/${req.file.filename}` : '',
         content,
         published: req.body.published ? true : false,
-        categoryId: categoryId ? categoryId : '',
-        userId,
+        categoryId: categoryId ? Number(categoryId) : '',
+        // userId,
         tags: {
-            connect: tags.map(id => ({ id }))
+            connect: tags.map(id => ({ id: parseInt(id) }))
         }
     }
 
@@ -75,6 +76,11 @@ const index = async (req, res) => {
 
         const posts = await prisma.post.findMany({
             where,
+            orderBy: [
+                {
+                    createdAt: 'desc'
+                }
+            ],
             take: parseInt(limit),
             skip: parseInt(offset),
             include: {
@@ -159,12 +165,12 @@ const update = async (req, res) => {
         const data = {
             title,
             slug: newSlug,
-            image: req.body.image ? req.body.image : '',
+            image: req.file ? `${HOST}:${PORT}/post_images/${req.file.filename}` : '',
             content,
             published: req.body.published ? true : false,
-            categoryId: categoryId ? categoryId : '',
+            categoryId: categoryId ? Number(categoryId) : '',
             tags: {
-                connect: tags.map(id => ({ id }))
+                connect: tags.map(id => ({ id: parseInt(id) }))
             }
         }
 

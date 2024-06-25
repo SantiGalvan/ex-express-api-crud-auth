@@ -60,19 +60,23 @@ const bodyData = {
             options: async (array) => {
                 // Controllo che gli id dei tag ricevuti siano numeri
                 const typeId = array.find(id => isNaN(parseInt(id)));
-                if (typeId) throw new Error('Uno o più id non sono numeri')
+                if (typeId) throw new Error('Uno o più id non sono numeri');
+
+                const intTags = array.map(id => parseInt(id));
 
                 //? Controllo se gli id dei tag ricevuti esistano
                 // Recupero tutti i tags
                 const tags = await prisma.tag.findMany();
                 // Recupero solo gli id dei tags
                 const tagIds = tags.map(tag => tag.id);
-                // Recupero dall'array ricebuto gli id a cui corridspondono
-                const id = tagIds.filter(id => array.includes(id));
-                if (id.length !== array.length) {
-                    const idNotExists = array.filter(i => !id.includes(i));
+                // Recupero dall'array ricevuto gli id a cui corridspondono
+                const ids = tagIds.filter(id => intTags.includes(id));
+                if (ids.length !== intTags.length) {
+                    const idNotExists = intTags.filter(i => !ids.includes(i));
                     throw new Error(`Gli id:${idNotExists} non sono degli id dei tags`);
                 }
+
+                return true;
             }
         }
     },

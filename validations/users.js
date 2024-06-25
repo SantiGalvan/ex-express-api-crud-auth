@@ -70,7 +70,7 @@ const loginBody = {
             bail: true
         },
         isString: {
-            errorMessage: 'La password non può contenere solo da numeri',
+            errorMessage: 'La password non può contenere solo numeri',
         }
     }
 }

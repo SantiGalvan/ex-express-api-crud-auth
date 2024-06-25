@@ -19,7 +19,9 @@ const register = async (req, res) => {
 
         const token = generateToken({
             email: user.email,
-            name: user.name
+            name: user.name,
+            isAdmin: false,
+            isOwner: false
         });
 
         delete user.id;
@@ -37,17 +39,19 @@ const login = async (req, res) => {
         // Recupero gli elementi
         const { email, password } = req.body;
 
-        const error = new Error('Email o password errati');
+        // const error = new Error('Email o password errati');
 
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) throw error;
+        if (!user) throw new Error('Email errata');
 
         const isPasswordValid = await comparePassword(password, user.password);
-        if (!isPasswordValid) throw error;
+        if (!isPasswordValid) throw new Error('Password errata');
 
         const token = generateToken({
             email: user.email,
-            name: user.name
+            name: user.name,
+            isAdmin: user.isAdmin,
+            isOwner: user.isOwner
         });
 
         delete user.id;
