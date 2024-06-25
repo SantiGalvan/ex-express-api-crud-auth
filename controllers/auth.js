@@ -39,8 +39,6 @@ const login = async (req, res) => {
         // Recupero gli elementi
         const { email, password } = req.body;
 
-        // const error = new Error('Email o password errati');
-
         const user = await prisma.user.findUnique({ where: { email } });
         if (!user) throw new Error('Email errata');
 
