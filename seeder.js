@@ -1,4 +1,5 @@
 const { PrismaClient } = require("@prisma/client");
+const { hashPassword } = require("./utils/password");
 const prisma = new PrismaClient();
 
 const tags = [
@@ -497,11 +498,22 @@ prisma.tag.createMany({
     .catch(err => console.error(err));
 
 // User
-prisma.user.createMany({
-    data: users
+users.forEach(async (user) => {
+    const { id, email, name, password, isAdmin, isOwner } = user;
+
+    const passwordDb = await hashPassword(password);
+
+    const data = {
+        id,
+        email,
+        name,
+        password: passwordDb,
+        isAdmin,
+        isOwner
+    };
+
+    prisma.user.create({ data }).then().catch(err => console.error(err));
 })
-    .then()
-    .catch(err => console.error(err));
 
 // Posts
 posts.forEach(post => {
