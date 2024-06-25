@@ -39,13 +39,13 @@ const login = async (req, res) => {
         // Recupero gli elementi
         const { email, password } = req.body;
 
-        const error = new Error('Email o password errati');
+        // const error = new Error('Email o password errati');
 
         const user = await prisma.user.findUnique({ where: { email } });
-        if (!user) throw error;
+        if (!user) throw new Error('Email errata');
 
         const isPasswordValid = await comparePassword(password, user.password);
-        if (!isPasswordValid) throw error;
+        if (!isPasswordValid) throw new Error('Password errata');
 
         const token = generateToken({
             email: user.email,
