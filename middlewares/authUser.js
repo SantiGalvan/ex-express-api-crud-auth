@@ -20,7 +20,7 @@ const verifyOwnership = async (req, res, next) => {
         // Recupero l'intero post
         const post = await prisma.post.findUnique({ where: { slug: postSlug } });
 
-        if (post.userId !== userId) {
+        if (post.userId !== userId && user.isOwner === false) {
             res.status(403).send('Non sei autorizzato');
         } else {
             next();
